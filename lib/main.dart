@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'screens/home_screen.dart';
 import 'screens/account_screen.dart';
 import 'screens/favourite_drivers_screen.dart';
+import 'screens/safety_screen.dart';
 import 'theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const EvanaApp());
 }
 
@@ -36,6 +43,7 @@ class _MainScreenState extends State<MainScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
+    const SafetyScreen(),
     const FavoritesScreen(),
     const AccountScreen(),
   ];
@@ -54,11 +62,28 @@ class _MainScreenState extends State<MainScreen> {
         children: _widgetOptions,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.history_outlined), activeIcon: Icon(Icons.history), label: 'History'),
-          BottomNavigationBarItem(icon: Icon(Icons.star_border_outlined), activeIcon: Icon(Icons.star), label: 'Favorites'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), activeIcon: Icon(Icons.person), label: 'Account'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined), 
+            activeIcon: Icon(Icons.home), 
+            label: 'Home'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.security_outlined), 
+            activeIcon: Icon(Icons.security), 
+            label: 'Safety'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star_border_outlined), 
+            activeIcon: Icon(Icons.star), 
+            label: 'Favorites'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline), 
+            activeIcon: Icon(Icons.person), 
+            label: 'Account'
+          ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
