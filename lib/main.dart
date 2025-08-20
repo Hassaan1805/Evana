@@ -65,25 +65,21 @@ class _MainScreenState extends State<MainScreen> {
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined), 
-            activeIcon: Icon(Icons.home), 
-            label: 'Home'
-          ),
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home),
+              label: 'Home'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.security_outlined), 
-            activeIcon: Icon(Icons.security), 
-            label: 'Safety'
-          ),
+              icon: Icon(Icons.security_outlined),
+              activeIcon: Icon(Icons.security),
+              label: 'Safety'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star_border_outlined), 
-            activeIcon: Icon(Icons.star), 
-            label: 'Favorites'
-          ),
+              icon: Icon(Icons.star_border_outlined),
+              activeIcon: Icon(Icons.star),
+              label: 'Favorites'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline), 
-            activeIcon: Icon(Icons.person), 
-            label: 'Account'
-          ),
+              icon: Icon(Icons.person_outline),
+              activeIcon: Icon(Icons.person),
+              label: 'Account'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

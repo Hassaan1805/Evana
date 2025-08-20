@@ -28,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
             Image.asset(
               'assets/images/evana_logo.png',
               height: 30,
-              color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : null,
             ),
             const SizedBox(width: 8),
             Text(
@@ -102,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          
+
           // Header card with women empowerment message
           Positioned(
             top: 10,
@@ -110,7 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 15,
             child: Card(
               elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
@@ -156,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          
+
           // Ride booking card
           Positioned(
             top: 140,
@@ -164,7 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 15,
             child: Card(
               elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -186,10 +190,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 });
                               },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
                                 decoration: BoxDecoration(
-                                  color: _selectedRideType == 'rider' 
-                                      ? const Color(0xFFE91E63) 
+                                  color: _selectedRideType == 'rider'
+                                      ? const Color(0xFFE91E63)
                                       : Colors.transparent,
                                   borderRadius: BorderRadius.circular(25),
                                 ),
@@ -197,8 +202,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   'Book a Ride',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: _selectedRideType == 'rider' 
-                                        ? Colors.white 
+                                    color: _selectedRideType == 'rider'
+                                        ? Colors.white
                                         : Colors.black54,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -212,15 +217,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const DriverOnboardingScreen(),
+                                    builder: (context) =>
+                                        const DriverOnboardingScreen(),
                                   ),
                                 );
                               },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
                                 decoration: BoxDecoration(
-                                  color: _selectedRideType == 'driver' 
-                                      ? const Color(0xFFE91E63) 
+                                  color: _selectedRideType == 'driver'
+                                      ? const Color(0xFFE91E63)
                                       : Colors.transparent,
                                   borderRadius: BorderRadius.circular(25),
                                 ),
@@ -228,8 +235,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   'Become Driver',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: _selectedRideType == 'driver' 
-                                        ? Colors.white 
+                                    color: _selectedRideType == 'driver'
+                                        ? Colors.white
                                         : Colors.black54,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -240,19 +247,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    
+
                     if (_selectedRideType == 'rider') ...[
                       const SizedBox(height: 20),
                       TextField(
                         decoration: InputDecoration(
                           labelText: 'From: Current Location',
-                          prefixIcon: const Icon(Icons.my_location, color: Color(0xFFE91E63)),
+                          prefixIcon: const Icon(Icons.my_location,
+                              color: Color(0xFFE91E63)),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: Color(0xFFE91E63)),
+                            borderSide:
+                                const BorderSide(color: Color(0xFFE91E63)),
                           ),
                         ),
                       ),
@@ -260,13 +269,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       TextField(
                         decoration: InputDecoration(
                           labelText: 'To: Where are you going?',
-                          prefixIcon: const Icon(Icons.location_on, color: Color(0xFFE91E63)),
+                          prefixIcon: const Icon(Icons.location_on,
+                              color: Color(0xFFE91E63)),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: Color(0xFFE91E63)),
+                            borderSide:
+                                const BorderSide(color: Color(0xFFE91E63)),
                           ),
                         ),
                       ),
@@ -285,7 +296,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         child: const Text(
                           'Find Women Drivers',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],
@@ -294,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          
+
           // Bottom quick actions
           Positioned(
             bottom: 100,
@@ -408,8 +420,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               'Available Women Drivers',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 20),
             _buildDriverOption(
@@ -446,7 +458,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('Booking confirmed! Driver will arrive in 2 minutes.'),
+                    content: Text(
+                        'Booking confirmed! Driver will arrive in 2 minutes.'),
                     backgroundColor: Colors.green,
                   ),
                 );
@@ -478,7 +491,8 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: const Color(0xFFE91E63),
             child: Text(
               name[0],
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ),
           const SizedBox(width: 12),
@@ -564,28 +578,30 @@ class AppDrawer extends StatelessWidget {
                 Text(
                   'Welcome to Evana',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 Text(
                   'Safe rides by women, for women',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white70,
-                  ),
+                        color: Colors.white70,
+                      ),
                 ),
               ],
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.directions_bike, color: Color(0xFFE91E63)),
+            leading:
+                const Icon(Icons.directions_bike, color: Color(0xFFE91E63)),
             title: const Text('Become a Driver'),
             subtitle: const Text('Start earning with flexible hours'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DriverOnboardingScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const DriverOnboardingScreen()),
               );
             },
           ),
@@ -613,14 +629,19 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.settings_outlined),
             title: const Text('Settings'),
-            onTap: () { Navigator.pop(context); },
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
           ListTile(
             leading: const Icon(Icons.help_outline),
             title: const Text('Support & Help'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const SupportScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SupportScreen()));
             },
           ),
           ListTile(

@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "921951174709",
-    "project_id": "evana-93d73",
-    "storage_bucket": "evana-93d73.firebasestorage.app"
+    "project_number": "667191170367",
+    "project_id": "evana-bddfe",
+    "storage_bucket": "evana-bddfe.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:921951174709:android:595123d5653facf045717c",
+        "mobilesdk_app_id": "1:667191170367:android:bf8d449d4af433d2176f8a",
         "android_client_info": {
           "package_name": "evana.com.evana_taxi"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "921951174709-v7bb5ebbsp2160ej0vj68pg3k2lun6hr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCpL6YeWcmN73ciic4bqUSPlYqc8g1a3Aw"
+          "current_key": "AIzaSyAaPigtABI4uuRosOK4eyy9cGDZCs_npm8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "921951174709-v7bb5ebbsp2160ej0vj68pg3k2lun6hr.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

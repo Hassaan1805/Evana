@@ -8,7 +8,8 @@ class SafetyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Safety & Security'),
-        backgroundColor: const Color(0xFFE91E63), // Pink theme for women empowerment
+        backgroundColor:
+            const Color(0xFFE91E63), // Pink theme for women empowerment
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -18,7 +19,8 @@ class SafetyScreen extends StatelessWidget {
             // Emergency Features
             Card(
               elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -30,9 +32,12 @@ class SafetyScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         Text(
                           'Emergency Features',
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                       ],
                     ),
@@ -40,34 +45,38 @@ class SafetyScreen extends StatelessWidget {
                     _buildSafetyFeature(
                       icon: Icons.phone,
                       title: 'Emergency Contacts',
-                      description: 'Quick access to emergency contacts and helpline',
+                      description:
+                          'Quick access to emergency contacts and helpline',
                       onTap: () => _showEmergencyContacts(context),
                     ),
                     const Divider(),
                     _buildSafetyFeature(
                       icon: Icons.location_on,
                       title: 'Live Location Sharing',
-                      description: 'Share your ride location with trusted contacts',
+                      description:
+                          'Share your ride location with trusted contacts',
                       onTap: () => _showLocationSharing(context),
                     ),
                     const Divider(),
                     _buildSafetyFeature(
                       icon: Icons.shield,
                       title: 'SOS Alert',
-                      description: 'Instant alert to emergency services and contacts',
+                      description:
+                          'Instant alert to emergency services and contacts',
                       onTap: () => _showSOSFeature(context),
                     ),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 20),
-            
+
             // Driver Verification
             Card(
               elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -75,13 +84,17 @@ class SafetyScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.verified_user, color: Colors.green[600], size: 28),
+                        Icon(Icons.verified_user,
+                            color: Colors.green[600], size: 28),
                         const SizedBox(width: 12),
                         Text(
                           'Driver Verification',
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                       ],
                     ),
@@ -89,7 +102,8 @@ class SafetyScreen extends StatelessWidget {
                     _buildSafetyFeature(
                       icon: Icons.badge,
                       title: 'Verified Women Drivers',
-                      description: 'All drivers undergo thorough background verification',
+                      description:
+                          'All drivers undergo thorough background verification',
                       onTap: () => _showDriverVerification(context),
                     ),
                     const Divider(),
@@ -103,13 +117,14 @@ class SafetyScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 20),
-            
+
             // Ride Safety
             Card(
               elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -121,9 +136,12 @@ class SafetyScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         Text(
                           'Ride Safety',
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                       ],
                     ),
@@ -145,9 +163,9 @@ class SafetyScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 30),
-            
+
             // Safety Tips
             Container(
               width: double.infinity,
@@ -166,16 +184,20 @@ class SafetyScreen extends StatelessWidget {
                       const SizedBox(width: 8),
                       Text(
                         'Safety Tips',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
-                  _buildSafetyTip('Always verify driver details before starting the ride'),
-                  _buildSafetyTip('Share your trip details with trusted contacts'),
-                  _buildSafetyTip('Trust your instincts - if something feels wrong, speak up'),
+                  _buildSafetyTip(
+                      'Always verify driver details before starting the ride'),
+                  _buildSafetyTip(
+                      'Share your trip details with trusted contacts'),
+                  _buildSafetyTip(
+                      'Trust your instincts - if something feels wrong, speak up'),
                   _buildSafetyTip('Keep emergency contacts easily accessible'),
                 ],
               ),

@@ -39,6 +39,11 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    // Add Firebase BoM to manage Firebase SDK versions
+    dependencies {
+        implementation(platform("com.google.firebase:firebase-bom:34.1.0"))
+    }
 }
 
 flutter {

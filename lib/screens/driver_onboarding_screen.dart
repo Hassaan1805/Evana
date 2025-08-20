@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DriverOnboardingScreen extends StatefulWidget {
   const DriverOnboardingScreen({super.key});
@@ -10,12 +11,16 @@ class DriverOnboardingScreen extends StatefulWidget {
 class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
   int currentStep = 0;
   final PageController _pageController = PageController();
+  final _formKey = GlobalKey<FormState>();
+  String _selectedVehicleType = 'Scooty/Scooter';
+  bool _isSubmitting = false;
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _vehicleNumberController = TextEditingController();
+  final TextEditingController _vehicleNumberController =
+      TextEditingController();
   final TextEditingController _licenseController = TextEditingController();
 
   @override
@@ -39,7 +44,9 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 2),
                     height: 4,
                     decoration: BoxDecoration(
-                      color: index <= currentStep ? Colors.white : Colors.white.withOpacity(0.3),
+                      color: index <= currentStep
+                          ? Colors.white
+                          : Colors.white.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -47,7 +54,7 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
               }),
             ),
           ),
-          
+
           // Content
           Expanded(
             child: PageView(
@@ -65,7 +72,7 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
               ],
             ),
           ),
-          
+
           // Navigation buttons
           Container(
             padding: const EdgeInsets.all(16),
@@ -86,7 +93,7 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
                 if (currentStep > 0) const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: _isSubmitting ? null : () {
                       if (currentStep < 3) {
                         _pageController.nextPage(
                           duration: const Duration(milliseconds: 300),
@@ -100,7 +107,16 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
                       backgroundColor: const Color(0xFFE91E63),
                       foregroundColor: Colors.white,
                     ),
-                    child: Text(currentStep < 3 ? 'Next' : 'Complete Registration'),
+                    child: _isSubmitting 
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : Text(currentStep < 3 ? 'Next' : 'Complete Registration'),
                   ),
                 ),
               ],
@@ -133,9 +149,9 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
           Text(
             'Welcome to Evana Driver!',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFFE91E63),
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFFE91E63),
+                ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
@@ -145,7 +161,7 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
-          
+
           // Benefits
           _buildBenefitCard(
             icon: Icons.schedule,
@@ -184,18 +200,17 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
           Text(
             'Personal Information',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const SizedBox(height: 8),
           Text(
             'Help us get to know you better',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.grey[600],
-            ),
+                  color: Colors.grey[600],
+                ),
           ),
           const SizedBox(height: 32),
-          
           TextFormField(
             controller: _nameController,
             decoration: const InputDecoration(
@@ -205,7 +220,6 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          
           TextFormField(
             controller: _phoneController,
             keyboardType: TextInputType.phone,
@@ -216,7 +230,6 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          
           TextFormField(
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
@@ -227,7 +240,6 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          
           TextFormField(
             controller: _addressController,
             maxLines: 3,
@@ -237,7 +249,6 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
               border: OutlineInputBorder(),
             ),
           ),
-          
           const SizedBox(height: 24),
           Container(
             padding: const EdgeInsets.all(16),
@@ -276,18 +287,18 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
           Text(
             'Vehicle Information',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const SizedBox(height: 8),
           Text(
             'Tell us about your scooty/vehicle',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.grey[600],
-            ),
+                  color: Colors.grey[600],
+                ),
           ),
           const SizedBox(height: 32),
-          
+
           TextFormField(
             controller: _vehicleNumberController,
             decoration: const InputDecoration(
@@ -298,7 +309,7 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          
+
           TextFormField(
             controller: _licenseController,
             decoration: const InputDecoration(
@@ -308,7 +319,7 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          
+
           // Vehicle type selection
           Container(
             padding: const EdgeInsets.all(16),
@@ -324,12 +335,13 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 12),
-                _buildVehicleOption('Scooty/Scooter', Icons.directions_bike, true),
-                _buildVehicleOption('Motorcycle', Icons.motorcycle, false),
+                _buildVehicleOption(
+                    'Scooty/Scooter', Icons.directions_bike, _selectedVehicleType == 'Scooty/Scooter'),
+                _buildVehicleOption('Motorcycle', Icons.motorcycle, _selectedVehicleType == 'Motorcycle'),
               ],
             ),
           ),
-          
+
           const SizedBox(height: 24),
           Container(
             padding: const EdgeInsets.all(16),
@@ -393,8 +405,8 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
           Text(
             'Verification Process',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+                  fontWeight: FontWeight.bold,
+                ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
@@ -404,11 +416,11 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
-          
           _buildVerificationStepCard(
             icon: Icons.upload_file,
             title: 'Document Upload',
-            description: 'Upload photos of your license and vehicle registration',
+            description:
+                'Upload photos of your license and vehicle registration',
             isCompleted: false,
           ),
           const SizedBox(height: 16),
@@ -432,7 +444,6 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
             description: 'Get approved and start earning within 24-48 hours',
             isCompleted: false,
           ),
-          
           const SizedBox(height: 32),
           Container(
             padding: const EdgeInsets.all(16),
@@ -525,24 +536,31 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
   }
 
   Widget _buildVehicleOption(String title, IconData icon, bool isSelected) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
-        color: isSelected ? Colors.pink[50] : Colors.transparent,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isSelected ? Colors.pink[300]! : Colors.grey[300]!,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedVehicleType = title;
+        });
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.pink[50] : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: isSelected ? Colors.pink[300]! : Colors.grey[300]!,
+          ),
         ),
-      ),
-      child: ListTile(
-        leading: Icon(
-          icon,
-          color: isSelected ? Colors.pink[400] : Colors.grey[600],
+        child: ListTile(
+          leading: Icon(
+            icon,
+            color: isSelected ? Colors.pink[400] : Colors.grey[600],
+          ),
+          title: Text(title),
+          trailing: isSelected
+              ? Icon(Icons.check_circle, color: Colors.pink[400])
+              : null,
         ),
-        title: Text(title),
-        trailing: isSelected 
-            ? Icon(Icons.check_circle, color: Colors.pink[400])
-            : null,
       ),
     );
   }
@@ -596,22 +614,95 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
               ],
             ),
           ),
-          if (isCompleted)
-            Icon(Icons.check_circle, color: Colors.green[400]),
+          if (isCompleted) Icon(Icons.check_circle, color: Colors.green[400]),
         ],
       ),
     );
   }
 
-  void _completeOnboarding() {
-    // TODO: Submit registration data
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Registration submitted! We\'ll contact you within 24 hours.'),
-        backgroundColor: Colors.green,
-      ),
-    );
-    Navigator.of(context).pop();
+  void _completeOnboarding() async {
+    // Validate required fields
+    if (_nameController.text.trim().isEmpty ||
+        _phoneController.text.trim().isEmpty ||
+        _emailController.text.trim().isEmpty ||
+        _addressController.text.trim().isEmpty ||
+        _vehicleNumberController.text.trim().isEmpty ||
+        _licenseController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill all required fields'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      _isSubmitting = true;
+    });
+
+    try {
+      // Create driver data object
+      final driverData = {
+        'personalInfo': {
+          'fullName': _nameController.text.trim(),
+          'phoneNumber': _phoneController.text.trim(),
+          'email': _emailController.text.trim(),
+          'address': _addressController.text.trim(),
+        },
+        'vehicleInfo': {
+          'vehicleNumber': _vehicleNumberController.text.trim(),
+          'licenseNumber': _licenseController.text.trim(),
+          'vehicleType': _selectedVehicleType,
+        },
+        'registrationStatus': {
+          'status': 'pending', // pending, approved, rejected
+          'submittedAt': FieldValue.serverTimestamp(),
+          'documentsUploaded': false,
+          'phoneVerified': false,
+          'backgroundCheckCompleted': false,
+        },
+        'applicationInfo': {
+          'city': 'Jaipur',
+          'platform': 'Evana',
+          'driverType': 'women_driver',
+        },
+      };
+
+      // Save to Firestore
+      await FirebaseFirestore.instance
+          .collection('driver_applications')
+          .add(driverData);
+
+      // Show success message
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Registration submitted successfully! We\'ll contact you within 24 hours for document verification.'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 4),
+          ),
+        );
+        Navigator.of(context).pop();
+      }
+    } catch (e) {
+      // Show error message
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Registration failed: ${e.toString()}'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 4),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSubmitting = false;
+        });
+      }
+    }
   }
 
   @override
