@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class DriverOnboardingScreen extends StatefulWidget {
   const DriverOnboardingScreen({super.key});
@@ -93,21 +93,23 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
                 if (currentStep > 0) const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: _isSubmitting ? null : () {
-                      if (currentStep < 3) {
-                        _pageController.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      } else {
-                        _completeOnboarding();
-                      }
-                    },
+                    onPressed: _isSubmitting
+                        ? null
+                        : () {
+                            if (currentStep < 3) {
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            } else {
+                              _completeOnboarding();
+                            }
+                          },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFE91E63),
                       foregroundColor: Colors.white,
                     ),
-                    child: _isSubmitting 
+                    child: _isSubmitting
                         ? const SizedBox(
                             height: 20,
                             width: 20,
@@ -116,7 +118,8 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
                               strokeWidth: 2,
                             ),
                           )
-                        : Text(currentStep < 3 ? 'Next' : 'Complete Registration'),
+                        : Text(
+                            currentStep < 3 ? 'Next' : 'Complete Registration'),
                   ),
                 ),
               ],
@@ -335,9 +338,10 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 12),
-                _buildVehicleOption(
-                    'Scooty/Scooter', Icons.directions_bike, _selectedVehicleType == 'Scooty/Scooter'),
-                _buildVehicleOption('Motorcycle', Icons.motorcycle, _selectedVehicleType == 'Motorcycle'),
+                _buildVehicleOption('Scooty/Scooter', Icons.directions_bike,
+                    _selectedVehicleType == 'Scooty/Scooter'),
+                _buildVehicleOption('Motorcycle', Icons.motorcycle,
+                    _selectedVehicleType == 'Motorcycle'),
               ],
             ),
           ),
@@ -642,8 +646,12 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
     });
 
     try {
-      // Create driver data object
-      final driverData = {
+      // Save to Firebase Realtime Database
+      DatabaseReference driversRef =
+          FirebaseDatabase.instance.ref().child('driver_applications');
+      String applicationId = driversRef.push().key!;
+
+      await driversRef.child(applicationId).set({
         'personalInfo': {
           'fullName': _nameController.text.trim(),
           'phoneNumber': _phoneController.text.trim(),
@@ -657,7 +665,7 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
         },
         'registrationStatus': {
           'status': 'pending', // pending, approved, rejected
-          'submittedAt': FieldValue.serverTimestamp(),
+          'submittedAt': DateTime.now().millisecondsSinceEpoch,
           'documentsUploaded': false,
           'phoneVerified': false,
           'backgroundCheckCompleted': false,
@@ -667,18 +675,14 @@ class _DriverOnboardingScreenState extends State<DriverOnboardingScreen> {
           'platform': 'Evana',
           'driverType': 'women_driver',
         },
-      };
-
-      // Save to Firestore
-      await FirebaseFirestore.instance
-          .collection('driver_applications')
-          .add(driverData);
+      });
 
       // Show success message
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Registration submitted successfully! We\'ll contact you within 24 hours for document verification.'),
+            content: Text(
+                'Registration submitted successfully! We\'ll contact you within 24 hours for document verification.'),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 4),
           ),

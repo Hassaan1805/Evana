@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
-
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -37,6 +36,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '921951174709',
     projectId: 'evana-93d73',
     authDomain: 'evana-93d73.firebaseapp.com',
+    databaseURL: 'https://evana-bddfe-default-rtdb.firebaseio.com/',
     storageBucket: 'evana-93d73.firebasestorage.app',
     measurementId: 'G-YDCK5XEF68',
   );
@@ -46,6 +46,7 @@ class DefaultFirebaseOptions {
     appId: '1:921951174709:android:595123d5653facf045717c',
     messagingSenderId: '921951174709',
     projectId: 'evana-93d73',
+    databaseURL: 'https://evana-bddfe-default-rtdb.firebaseio.com/',
     storageBucket: 'evana-93d73.firebasestorage.app',
   );
 
@@ -54,8 +55,10 @@ class DefaultFirebaseOptions {
     appId: '1:921951174709:ios:691ac7b1f0d6f0ad45717c',
     messagingSenderId: '921951174709',
     projectId: 'evana-93d73',
+    databaseURL: 'https://evana-bddfe-default-rtdb.firebaseio.com/',
     storageBucket: 'evana-93d73.firebasestorage.app',
-    iosClientId: '921951174709-vce4je579agve9ke3t20olf68sjva8il.apps.googleusercontent.com',
+    iosClientId:
+        '921951174709-vce4je579agve9ke3t20olf68sjva8il.apps.googleusercontent.com',
     iosBundleId: 'evana.com.evanaTaxi',
   );
 
@@ -64,8 +67,10 @@ class DefaultFirebaseOptions {
     appId: '1:921951174709:ios:691ac7b1f0d6f0ad45717c',
     messagingSenderId: '921951174709',
     projectId: 'evana-93d73',
+    databaseURL: 'https://evana-bddfe-default-rtdb.firebaseio.com/',
     storageBucket: 'evana-93d73.firebasestorage.app',
-    iosClientId: '921951174709-vce4je579agve9ke3t20olf68sjva8il.apps.googleusercontent.com',
+    iosClientId:
+        '921951174709-vce4je579agve9ke3t20olf68sjva8il.apps.googleusercontent.com',
     iosBundleId: 'evana.com.evanaTaxi',
   );
 
@@ -75,6 +80,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '921951174709',
     projectId: 'evana-93d73',
     authDomain: 'evana-93d73.firebaseapp.com',
+    databaseURL: 'https://evana-bddfe-default-rtdb.firebaseio.com/',
     storageBucket: 'evana-93d73.firebasestorage.app',
     measurementId: 'G-P2KG3HZMBR',
   );
